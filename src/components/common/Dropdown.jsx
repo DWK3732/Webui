@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Dropmenu = styled.div`
     display: flex;
@@ -27,8 +28,12 @@ export default function Dropdown() {
     return (
         <Dropmenu>
             <ul>
-                <li>정보수정</li>
-                <li>로그아웃</li>
+                <li>
+                    <Link to = "/modify">정보수정</Link>
+                </li>
+                <li>
+                    <Link to = "/login">로그아웃</Link>
+                </li>
             </ul>
         </Dropmenu>
     );
