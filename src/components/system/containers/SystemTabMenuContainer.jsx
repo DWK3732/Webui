@@ -10,7 +10,7 @@ const Container = styled.div`
   justify-content: center;
   div {
     width: 100%;
-    max-width: 1280px;
+    max-width: 1000px;
     h3 {
         margin-bottom: 30px;
     }
@@ -24,7 +24,7 @@ const Container = styled.div`
   }
   li {
     border: 2px solid black;
-    padding: 9px 40px;
+    padding: 7px 35px;
     border-bottom: none;
     cursor: pointer;
   }

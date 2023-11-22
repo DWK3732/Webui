@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "/assets/images/logo.png";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -14,7 +15,7 @@ const LoginBox = styled.div`
   max-width: 450px;
   border: 2px solid #7b91a7;
   border-radius: 10px;
-  margin-top: 10rem;
+  margin-top: 7%;
   img {
     width: auto;
     height: 80px;
@@ -54,6 +55,7 @@ const LoginBox = styled.div`
 `;
 
 export default function Login() {
+  const navigate = useNavigate();
   return (
     <Container>
       <LoginBox>
@@ -64,7 +66,7 @@ export default function Login() {
 
             <input type="password" placeholder="비밀번호" />
 
-            <button>로그인</button>
+            <button onClick={()=> {navigate("/admin")}}>로그인</button>
           </form>
           <p>© 2023. (주)제이솔루션 all rights reserved.</p>
         </div>

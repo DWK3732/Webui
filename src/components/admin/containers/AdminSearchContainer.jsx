@@ -9,7 +9,7 @@ const SearchFilter = styled.div`
     display: flex;
     justify-content: center;
     width: 100%;
-    max-width: 1280px;
+    max-width: 1000px;
   }
   select {
     border: 2px solid #e5eaf2;
