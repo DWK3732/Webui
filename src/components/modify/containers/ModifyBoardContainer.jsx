@@ -1,5 +1,5 @@
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import modify from "/assets/images/modify.png";
 import ModifySysModal from '@components/modify/ModifySysModal';
@@ -165,6 +165,48 @@ const RequiredSpan = styled.span`
 
 const ModifyBoardContainer = () => {
     const [isModalOpen, setModalOpen] = useState(false);
+    const navigate = useNavigate();
+    const handleCancel = () => {
+      navigate(-1);
+    }
+    const [formData, setFormData] = useState({
+      systemName:"",//시스템명
+      departmentName:"",//시스템 담당자
+      department:"",//시스템 담당 부서
+      companyName:"",//업체명
+      developerName:"",//담당자
+      contactNum:"",//담당자 연락처
+      password:"",//비밀번호
+      passwordCheck:""//비밀번호 확인
+    });
+    const handleInputChage = (e) => {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
+    const handleContactChange = (partIndex, value) => {
+        const parts = formData.contactNum.split('-');
+        parts[partIndex] = value;
+
+        const newContactNumber = parts.filter(Boolean).join('-');
+        setFormData({ ...formData, contactNum: newContactNumber });
+    };
+    const [userIdPlaceholder, setUserIdPlaceholder] = useState("Loading...");
+
+    useEffect(() => {
+      const fetchUserIdPlaceholder = async () => {
+      try{ 
+        const response = await fetch("/api/user/id");
+        if(!response.ok){
+          throw new Error("Network Error");
+        }
+        const data = await response.json();
+        setUserIdPlaceholder(data.placeholder);
+      } catch (error) {
+        console.error("fetch에 실패하였습니다", error);
+        setUserIdPlaceholder("Error loading placeholder");
+      }
+    };
+    fetchUserIdPlaceholder();
+  }, []);
   return (
     <PageContainer>
       <Title>정보 수정</Title>
@@ -174,32 +216,32 @@ const ModifyBoardContainer = () => {
           <FormRow>
             <InputContainer>
               <RequiredSpan>시스템명</RequiredSpan>
-              <input type="text" placeholder="시스템명" />
+              <input type="text" name="systemName" placeholder="시스템명" onChange={handleInputChage} />
             </InputContainer>
             <InputContainer>
               <RequiredSpan>시스템 담당자</RequiredSpan>
-              <input type="text" placeholder="시스템 담당자" />
+              <input type="text" name="depertmentName" placeholder="시스템 담당자" onChange={handleInputChage} />
             </InputContainer>
             <InputContainer>
               <RequiredSpan>시스템 담당부서</RequiredSpan>
-              <input type="text" placeholder="시스템 담당부서" />
+              <input type="text" name="depertment" placeholder="시스템 담당부서" onChange={handleInputChage} />
             </InputContainer>
           </FormRow>
           <FormRow>
               <InputContainer>
                   <span>업체명</span>
-                  <input type="text" placeholder="업체명" />
+                  <input type="text" name="companyName" placeholder="업체명" onChange={handleInputChage}/>
               </InputContainer>
               <InputContainer>
                   <RequiredSpan>담당자</RequiredSpan>
-                  <input type="text" placeholder="담당자" />
+                  <input type="text" name="developerName" placeholder="담당자" onChange={handleInputChage} />
               </InputContainer>
               <InputContainer>
                   <RequiredSpan>담당자 연락처</RequiredSpan>
                   <InputRow>
-                      <input type="text" placeholder="담당자 연락처" />
-                      <input type="text" placeholder="0000" />
-                      <input type="text" placeholder="0000" />
+                      <input type="text" placeholder="담당자 연락처" onChange={(e) => handleContactChange(0, e.target.value)} />
+                      <input type="text" placeholder="0000" onChange={(e) => handleContactChange(1, e.target.value)} />
+                      <input type="text" placeholder="0000" onChange={(e) => handleContactChange(2, e.target.value)} />
                   </InputRow>
                   
               </InputContainer>
@@ -207,12 +249,12 @@ const ModifyBoardContainer = () => {
           <FormRow>
               <InputContainer>
                   <RequiredSpan>아이디</RequiredSpan>
-                  <input type="text" placeholder="test-company" disabled/>
+                  <input type="text" placeholder={userIdPlaceholder} disabled/>
                   <p>아이디는 수정이 불가능합니다.</p>
               </InputContainer>
               <InputContainer>
                   <RequiredSpan>비밀번호</RequiredSpan>
-                  <input type="text" placeholder="비밀번호" />
+                  <input type="text" name="password" placeholder="비밀번호" onChange={handleInputChage} />
               </InputContainer>
               <InputContainer>
               </InputContainer>
@@ -222,16 +264,16 @@ const ModifyBoardContainer = () => {
               </InputContainer>
               <InputContainer>
                   <RequiredSpan>비밀번호 확인</RequiredSpan>
-                  <input type="text" placeholder="비밀번호 확인" />
+                  <input type="text" name="passwordCheck" placeholder="비밀번호 확인" onChange={handleInputChage} />
               </InputContainer>
               <InputContainer>
               </InputContainer>
           </FormRow>
         </Form>
         <ButtonGroup>
-          <button className="group-button">취소</button>
+          <button className="group-button" onClick={handleCancel}>취소</button>
           <button className="group-button" onClick={() => setModalOpen(true)}>수정하기</button>
-        {isModalOpen && <ModifySysModal closeModal={() => setModalOpen(false)} />}
+        {isModalOpen && <ModifySysModal closeModal={() => setModalOpen(false)} formData={formData} />}
         </ButtonGroup>
       </Container>
     </PageContainer>
