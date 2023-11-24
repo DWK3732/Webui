@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "/assets/images/logo.png"
 import { useState } from "react";
 import styled from "styled-components";
@@ -55,6 +55,7 @@ const Navdiv = styled.div`
 
 const Admin = () => {
     const [view, setView] = useState(false);
+    const navigate = useNavigate();
     return (
       <Header>
         <Navdiv>
@@ -63,7 +64,7 @@ const Admin = () => {
           </Link>
 
           <nav>
-            <button>계정등록</button>
+            <button onClick={()=>{navigate('/regist')}}>계정등록</button>
 
             <span
               onClick={() => {

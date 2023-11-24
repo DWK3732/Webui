@@ -5,6 +5,7 @@ import { useToken } from "@hooks/useToken";
 import Admin from "@components/admin/Admin";
 import System from "@components/system/System";
 import Modify from "@components/modify/Modify";
+import Regist from "@components/regist/Regist";
 
 const RootNavigation = () => {
   const { getToken } = useToken();
@@ -20,6 +21,7 @@ const RootNavigation = () => {
       <Route path="/admin" element={<Admin></Admin>}/>
       <Route path="/system" element={<System></System>}/>
       <Route path="/modify" element={<Modify></Modify>}/>
+      <Route path="/regist" element={<Regist></Regist>}/>
     </Routes>
   );
 };

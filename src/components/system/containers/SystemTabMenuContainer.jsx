@@ -32,22 +32,16 @@ const Container = styled.div`
     border: 2px solid #4DBDE5;
     border-bottom: none;
   }
-`;
-const FlexContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-const RegisterButton = styled.button`
-  padding: 4px 10px;
-  color: white;
-  background-color: #007FFF;
-  border: 1px solid #007FFF;
-  border-radius: 10px;
-  font-size: medium;
-  cursor: pointer;
-  text-align: center;
-  width: 60px;
+  button {
+      padding: 5px 10px;
+      color: white;
+      background-color: #007FFF;
+      border: 1px solid #007FFF;
+      border-radius: 10px;
+      font-size: medium;
+      cursor: pointer;
+      float: right;
+    }
 `;
 
 
@@ -71,12 +65,11 @@ export default function SystemTabMenuContainer() {
             </li>
           ))}
         </ul>
-        
-        <FlexContainer>
-          <AdminSearchContainer></AdminSearchContainer>
-          <RegisterButton>등록</RegisterButton>
-        </FlexContainer>
 
+        <AdminSearchContainer></AdminSearchContainer>
+        
+        <button>게시글 등록</button>
+        
         {tab === 0 ? (
           <TabMenuStandard></TabMenuStandard>
         ) : tab === 1 ? (

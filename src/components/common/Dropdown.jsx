@@ -36,19 +36,9 @@ export default function Dropdown() {
     return (
         <Dropmenu>
             <ul>
-<<<<<<< HEAD
-                <li>
-                    <Link to = "/modify">정보수정</Link>
-                </li>
-                <li>
-                    <Link to = "/login">로그아웃</Link>
-                </li>
-=======
                 <li onClick={()=>{navigate('/modify')}}>정보수정</li>
                 <li onClick={()=>{navigate('/login')}}>로그아웃</li>
->>>>>>> a17d6a0e62ec59c2a4c565866ede5737d403819b
             </ul>
         </Dropmenu>
     );
 }
-
