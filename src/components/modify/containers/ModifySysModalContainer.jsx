@@ -106,7 +106,27 @@ const CloseButton = styled.button`
   }
 `;
 
-const ModifySysModalContainer = ({ closeModal }) => {
+const ModifySysModalContainer = ({ closeModal, formData }) => {
+  const handleSubmit = async() => {
+    try {
+      const response = await fetch('API 주소', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      if(!response.ok) {
+        throw new Error('Network Error');
+      }
+
+      closeModal();
+    } catch(error){
+      console.error('fetch에 실패하였습니다', error);
+    }
+  };
+  
   return (
     <ModalOverlay onClick={closeModal}>
       <ModalContainer onClick={(e) => e.stopPropagation()}>
@@ -115,7 +135,7 @@ const ModifySysModalContainer = ({ closeModal }) => {
         <ModalContent>선택하신 시스템 정보를 수정 하시겠습니까?</ModalContent>
         <ButtonGroup>
           <button className="modal-group-button" onClick={closeModal}>취소하기</button>
-          <button className="modal-group-button">수정하기</button>
+          <button className="modal-group-button" onClick={handleSubmit}>수정하기</button>
         </ButtonGroup>
       </ModalContainer>
     </ModalOverlay>
@@ -124,6 +144,7 @@ const ModifySysModalContainer = ({ closeModal }) => {
 
 ModifySysModalContainer.propTypes = {
   closeModal: PropTypes.func.isRequired,
+  formData: PropTypes.object.isRequired,
 };
 
 

@@ -167,10 +167,6 @@ const RequiredSpan = styled.span`
 const ModifyBoardContainer = () => {
     const [isModalOpen, setModalOpen] = useState(false);
     const navigate = useNavigate();
-<<<<<<< HEAD
-    const handleCancel = () => {
-      navigate(-1);
-    }
     const [formData, setFormData] = useState({
       systemName:"",//시스템명
       departmentName:"",//시스템 담당자
@@ -209,8 +205,6 @@ const ModifyBoardContainer = () => {
     };
     fetchUserIdPlaceholder();
   }, []);
-=======
->>>>>>> a17d6a0e62ec59c2a4c565866ede5737d403819b
   return (
     <PageContainer>
       <Title>정보 수정</Title>
@@ -275,11 +269,7 @@ const ModifyBoardContainer = () => {
           </FormRow>
         </Form>
         <ButtonGroup>
-<<<<<<< HEAD
-          <button className="group-button" onClick={handleCancel}>취소</button>
-=======
           <button className="group-button" onClick={() => {navigate(-1)}}>취소</button>
->>>>>>> a17d6a0e62ec59c2a4c565866ede5737d403819b
           <button className="group-button" onClick={() => setModalOpen(true)}>수정하기</button>
         {isModalOpen && <ModifySysModal closeModal={() => setModalOpen(false)} formData={formData} />}
         </ButtonGroup>
