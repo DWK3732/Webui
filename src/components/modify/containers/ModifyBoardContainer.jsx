@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import modify from "/assets/images/modify.png";
 import ModifySysModal from '@components/modify/ModifySysModal';
-import { useNavigate } from 'react-router-dom';
 
 
 const PageContainer = styled.div`
