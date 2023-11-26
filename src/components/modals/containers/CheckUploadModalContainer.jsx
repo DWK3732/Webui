@@ -8,7 +8,7 @@ const ModalOverlay = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.15);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -213,12 +213,12 @@ const CheckUploadModalContainer = ({ closeModal }) => {
         <ModalContent>검토 결과를 선택하여 주세요</ModalContent>
         <RadioGroup className="radio-group">
           <RadioButton className="radio-button">
-            <input type="radio" name="Result" value="option1" />
-            <label className="approve-label">승인</label>
+            <input type="radio" id="option1" name="Result" value="option1" />
+            <label className="approve-label" htmlFor="option1">승인</label>
           </RadioButton>
           <RadioButton className="radio-button">
-            <input type="radio" name="Result" value="option2" />
-            <label className="reject-label">반려</label>
+            <input type="radio" id="option2" name="Result" value="option2" />
+            <label className="reject-label" htmlFor="option2">반려</label>
           </RadioButton>
         </RadioGroup>
         <ModalContent>검토 결과 상세내역을 입력하여 주세요</ModalContent>
